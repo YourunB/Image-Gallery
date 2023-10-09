@@ -58,3 +58,37 @@ function createImage(smallImage, fullImage, description, altDescription) {
   main.getElementsByTagName('p')[main.getElementsByTagName('p').length - 1].classList = 'cards__description';
   main.getElementsByClassName('cards__description')[main.getElementsByClassName('cards__description').length - 1].textContent = altDescription;
 }
+
+function throttle(callee, timeout) {
+  let timer = null
+
+  return function perform(...args) {
+    if (timer) return
+
+    timer = setTimeout(() => {
+      callee(...args)
+
+      clearTimeout(timer)
+      timer = null
+    }, timeout)
+  }
+}
+
+btnUp.addEventListener('click', () => {
+  window.scroll({top: 0, behavior: "smooth"});
+});
+
+window.addEventListener("scroll", throttle( () => {
+  const height = document.body.offsetHeight;
+  const screenHeight = window.innerHeight;
+  const scrolled = window.scrollY;
+  const threshold = height - screenHeight / 4;
+  const position = scrolled + screenHeight;
+
+  if (scrolled > 400) btnUp.classList.remove('unvisible');
+  else btnUp.classList.add('unvisible');
+  if (position >= threshold) {
+    page += 1;
+    setTimeout(() => { getImages(page, search); }, 250);
+  }
+}, 250));
