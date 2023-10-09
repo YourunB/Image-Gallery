@@ -5,3 +5,58 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+body {
+  min-width: 320px;
+  min-height: 500px;
+  color: white;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+  max-width: 1400px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  min-height: 100vh;
+  padding: 0 10px;
+}
+
+header {
+  position: relative;
+  backdrop-filter: blur(5px);
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  padding: 10px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  z-index: 20;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  gap: 10px;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
