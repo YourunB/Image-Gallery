@@ -92,3 +92,121 @@ window.addEventListener("scroll", throttle( () => {
     setTimeout(() => { getImages(page, search); }, 250);
   }
 }, 250));
+
+document.body.addEventListener('click', () => {
+  audioClick.play();
+  if (event.target.classList == 'cards__image') {
+    document.body.classList.add('scroll-off');
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) === false) {
+      document.body.classList.add('scroll-padding');
+      document.getElementsByTagName('footer')[0].classList.add('footer-padding');
+    }
+    imageFull.src = event.target.src;
+    (event.target.dataset.description !== 'null') ? descriptionFull.textContent = event.target.dataset.description : descriptionFull.textContent = 'There is no additional description to this image';
+    downloadLink.href = event.target.dataset.download;
+    overlay.classList.add('overlay__index_up');
+    overlayBack.classList.add('overlay__background_show');
+
+    images = document.getElementsByClassName('cards__image');
+    for (let i = 0; i < images.length; i++) if (images[i] === event.target) count = i;
+  } 
+  if (navigator.maxTouchPoints === 0) {
+    if (event.target.classList.value === 'overlay__background overlay__background_show' || event.target.classList.value === 'overlay__background_controls') {
+      overlayBack.classList.remove('overlay__background_show');
+      setTimeout(() => { 
+        overlay.classList.remove('overlay__index_up');
+        document.body.classList.remove('scroll-off');
+        document.body.classList.remove('scroll-padding');
+        document.getElementsByTagName('footer')[0].classList.remove('footer-padding');
+      },2000);
+    }
+  }
+})
+
+btnPrev.addEventListener('click', () => {
+  imageFull.classList.add('hide');
+  count -= 1;
+  if (count < 0) count = images.length - 1;
+  setTimeout(()=>{
+    imageFull.src = images[count].src;
+    downloadLink.href = images[count].dataset.download;
+    (images[count].dataset.description !== 'null') ? descriptionFull.textContent = images[count].dataset.description : descriptionFull.textContent = 'There is no additional description to this image';
+    imageFull.classList.remove('hide');
+    imageFull.classList.add('show');
+    setTimeout(() => {
+      imageFull.classList.remove('show');
+    }, 200);
+  },200);
+});
+
+btnNext.addEventListener('click', () => {
+  imageFull.classList.add('hide');
+  count += 1;
+  if (count > images.length - 1) count = 0;
+  setTimeout(()=>{
+    imageFull.src = images[count].src;
+    downloadLink.href = images[count].dataset.download;
+    (images[count].dataset.description !== 'null') ? descriptionFull.textContent = images[count].dataset.description : descriptionFull.textContent = 'There is no additional description to this image';
+    imageFull.classList.remove('hide');
+    imageFull.classList.add('show');
+    setTimeout(() => {
+      imageFull.classList.remove('show');
+    }, 200);
+  },200);
+});
+
+overlay.addEventListener('touchstart', function (event) {
+  touchstartX = event.changedTouches[0].screenX;
+  touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+overlay.addEventListener('touchend', function (event) {
+  touchendX = event.changedTouches[0].screenX;
+  touchendY = event.changedTouches[0].screenY;
+  handleGesture();
+}, false);
+
+
+function handleGesture() {
+  if (touchendX < touchstartX) { //Swiped Left
+    imageFull.classList.add('hide');
+    count += 1;
+    if (count > images.length - 1) count = 0;
+    setTimeout(()=>{
+      imageFull.src = images[count].src;
+      downloadLink.href = images[count].dataset.download;
+      (images[count].dataset.description !== 'null') ? descriptionFull.textContent = images[count].dataset.description : descriptionFull.textContent = 'There is no additional description to this image';
+      imageFull.classList.remove('hide');
+      imageFull.classList.add('show');
+      setTimeout(() => {
+        imageFull.classList.remove('show');
+      }, 200);
+    },200);
+  }
+
+  if (touchendX > touchstartX) { //Swiped Right
+    imageFull.classList.add('hide');
+    count -= 1;
+    if (count < 0) count = images.length - 1;
+    setTimeout(()=>{
+      imageFull.src = images[count].src;
+      downloadLink.href = images[count].dataset.download;
+      (images[count].dataset.description !== 'null') ? descriptionFull.textContent = images[count].dataset.description : descriptionFull.textContent = 'There is no additional description to this image';
+      imageFull.classList.remove('hide');
+      imageFull.classList.add('show');
+      setTimeout(() => {
+        imageFull.classList.remove('show');
+      }, 200);
+    },200);
+  }
+
+  if (touchendY < touchstartY) { // Swiped Up
+    overlayBack.classList.remove('overlay__background_show');
+    setTimeout(() => { 
+      overlay.classList.remove('overlay__index_up');
+      document.body.classList.remove('scroll-off');
+      document.body.classList.remove('scroll-padding');
+      document.getElementsByTagName('footer')[0].classList.remove('footer-padding');
+    },2000);
+  }
+}
