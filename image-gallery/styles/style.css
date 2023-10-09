@@ -147,3 +147,7 @@ footer {
 .footer__year:hover {
   opacity: 1;
 }
+
+.unvisible {
+  display: none;
+}
