@@ -39,6 +39,65 @@ header {
   align-items: center;
 }
 
+.header__search {
+  width: calc(100% - 280px);
+}
+
+.header__search-btn {
+  position: fixed;
+  left: 30px;
+  background: white;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 25px;
+  height: 25px;
+  transition: 1s;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.header__search-btn-active {
+  opacity: 1;
+}
+
+.header__search-btn-active:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.header__search-btn-active:active {
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+.header__clear-btn {
+  position: fixed;
+  background: white;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 25px;
+  height: 25px;
+  transition: 1s;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.header__clear-btn-active {
+  opacity: 1;
+}
+
+.header__clear-btn-active:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.header__clear-btn-active:active {
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
 main {
   display: flex;
   justify-content: center;
