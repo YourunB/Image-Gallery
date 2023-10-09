@@ -60,3 +60,31 @@ footer {
   box-sizing: border-box;
   padding-right: 10px;
 }
+
+.footer__logo {
+  height: 50px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  transition: 1s;
+  opacity: 0.5;
+}
+
+.footer__logo:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.footer__year {
+  cursor: default;
+  opacity: 0.5;
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 0 5px rgb(0,0,0, 1);
+  transition: 1s;
+}
+
+.footer__year:hover {
+  opacity: 1;
+}
